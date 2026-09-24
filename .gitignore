@@ -1,0 +1,152 @@
+.env
+# Бэкапы .env (.env.bak.*) содержат те же секреты, что и .env — точный паттерн
+# .env их не покрывает, нужен wildcard. .env.example уже закоммичен — этот
+# паттерн его не заденет (гитигнор не трогает уже отслеживаемые файлы).
+.env*
+__pycache__/
+*.pyc
+*.mp4
+*.jpg
+*.jpeg
+.DS_Store
+venv/
+.coverage
+# Логи (err.log в корне и т.п.) — рантайм-артефакты, не для репозитория
+*.log
+
+# Google Cloud service account credentials
+data/google-credentials.json
+data/amo_token.json
+data/amo_data.json
+data/decisions.db
+
+# Кеши и история выполнения (генерируются при работе)
+data/analytics_cache.json
+data/launch_history.json
+data/history.json
+data/pending_briefs.json
+data/historical_data.json
+data/learner_results.json
+data/autonomous_pause_state.json
+data/creative_similarity.json
+data/creative_similarity_report.txt
+data/thumb_cache.json
+data/lal/
+
+# Артефакты деплоя и тестов
+deploy_bundle/
+deploy_server_bundle/
+.playwright-mcp/
+.claude/
+
+# Временные выгрузки
+data/research/
+data/fact_sheet.json
+
+# Runtime logs
+logs/
+
+# ---------------------------------------------------------------------------
+# Runtime state: точечные записи — НЕ используем широкий data/*.json,
+# чтобы не скрыть нужные fixtures/reference (competitor_ads.json, decisions.json,
+# winner_archive.json — они трекаются и должны оставаться в Git).
+# Эти файлы генерируются при работе бота, содержат оперативное состояние/кеши,
+# и не должны попадать в репозиторий как исходный код.
+# ---------------------------------------------------------------------------
+
+# Секреты / креды (кроме уже перечисленных выше)
+data/fb_credentials.json
+
+# База знаний креативов и общие настройки
+data/creative_kb.db
+data/settings.json
+
+# Авто-действия и автопилот (state + дневные срезы)
+data/auto_actions.json
+data/autopilot_state.json
+data/autopilot_live_state.json
+data/autopilot_live_daily.json
+data/autopilot_classic_daily.json
+data/autopilot_hold_state.json
+
+# Budget scaler / дневной кап / cron / v2 (+ lock/tmp атомарной записи)
+data/budget_scaler_state.json
+data/budget_scaler_v2_state.json
+data/budget_daily_cap_state.json
+data/budget_scaler_cron_state.json
+data/*.json.lock
+data/*.json.*.tmp
+
+# CDP payments state / кеш / cron / алерты
+data/cdp_payments_state.json
+data/cdp_payments_lead_cache.json
+data/cdp_payments_sync_cron_state.json
+data/cdp_spend_alerts_state.json
+
+# Cron heartbeats / watchdog / сбои
+data/cron_heartbeats.json
+data/cron_failure_state.json
+data/cron_watchdog_state.json
+
+# Doubt log / self-check движка
+data/doubt_log.json
+data/engine_selfcheck_state.json
+
+# Guardian / expired-offer / metrics backfill
+data/guardian_state.json
+data/guardian_sweep_cron_state.json
+data/expired_offer_guard_state.json
+data/expired_offer_guard_cron_state.json
+data/metrics_backfill_state.json
+
+# Watchdog / переименование / время создания объявлений
+data/ad_created_times.json
+data/ad_rename_state.json
+data/ads_watchdog_state.json
+
+# Cleaner / spend guard (adset) / online report / spend refresh
+data/adset_cleaner_cron_state.json
+data/adset_spend_guard_state.json
+data/adset_spend_guard_cron_state.json
+data/online_report_state.json
+data/spend_refresh_state.json
+
+# Аномалии / авто-запуск / launch verify / брифы
+data/anomaly_alerts_state.json
+data/auto_launch_state.json
+data/auto_launch_cron_state.json
+data/ad_asset_recovery_state.json
+data/launch_verify_state.json
+data/launch_verify_cron_state.json
+data/brief_gen_state.json
+
+# Google расход / cron
+data/google_daily_spend.json
+data/google_spend_cron_state.json
+
+# Прочее оперативное состояние (квал-baseline, LLM-кредиты, покрытие,
+# сверка исходов, план-кеш, скоркард, telegram, vision)
+data/qual_baseline_state.json
+data/llm_credit_alert_state.json
+data/coverage_state.json
+data/match_outcomes_state.json
+data/plan_cache.json
+data/scorecard_state.json
+data/telegram_state.json
+data/vision_analysis.json
+
+# Approval Checker: append-only audit, locks, reconciliation и immutable launch staging
+data/approval_checker_audit.jsonl
+data/approval_checker.lock
+data/approval_checker_reconciliation.json
+data/action_producer_keys.json
+data/metrics_snapshot_state.json
+data/approval_staging/
+data/locks/
+
+# Разовые выгрузки — не в Git
+exports/
+
+# Публичная версия: весь рантайм в data/ не коммитится, шаблон окружения — да
+data/
+!.env.example
